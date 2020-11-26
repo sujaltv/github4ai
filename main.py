@@ -71,10 +71,4 @@ def bot_job():
 
 
 if __name__ == '__main__':
-  schedule.every().day.at("04:45").do(bot_job)
-  schedule.every().day.at("16:45").do(bot_job)
-
-  while True:
-    print(f'Logged on {datetime.now().strftime("%a, %d %h %Y at %H:%M:%S")}.')
-    schedule.run_pending()
-    time.sleep(5 * 60) # sleep for five minutes
+  bot_job()
