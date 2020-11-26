@@ -67,14 +67,14 @@ def bot_job():
 
   tweet_content = get_tweet_content_from_res(random.choice(repos))
   twitter.tweet(tweet_content)
-  print(f'Tweeter on {datetime.now().strftime("%a, %d %h %Y at %H:%M")}.')
+  print(f'Tweeted on {datetime.now().strftime("%a, %d %h %Y at %H:%M")}.')
 
 
 if __name__ == '__main__':
-  schedule.every().day.at("00:00").do(bot_job)
-  schedule.every().day.at("12:00").do(bot_job)
+  schedule.every().day.at("04:45").do(bot_job)
+  schedule.every().day.at("16:45").do(bot_job)
 
   while True:
-    print(f'Log on {datetime.now().strftime("%a, %d %h %Y at %H:%M")}.')
+    print(f'Logged on {datetime.now().strftime("%a, %d %h %Y at %H:%M")}.')
     schedule.run_pending()
-    time.sleep(60)
+    time.sleep(5 * 60) # sleep for five minutes
