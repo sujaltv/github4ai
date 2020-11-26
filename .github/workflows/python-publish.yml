@@ -1,0 +1,25 @@
+# This workflows will upload a Python Package using Twine when a release is created
+# For more information see: https://help.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions#publishing-to-package-registries
+
+name: Upload Python Package
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Glitch Project Sync
+      # You may pin to the exact commit or the version.
+      # uses: kanadgupta/glitch-sync@739600fbeefa6554c49ef5b770d26a8409cf5841
+      uses: kanadgupta/glitch-sync@v1.0
+      with:
+        # ID of your Glitch Project
+        project-id: ${{ secrets.glitch_appid }}
+        # Auth token for your Glitch Project
+        auth-token: ${{ secrets.glitch_authtoken }}
