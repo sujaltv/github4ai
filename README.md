@@ -1,20 +1,20 @@
-# GitHub TopStar
+# GitHub for AI
 
-This is a [bot](https://twitter.com/GitHubTopStar) that tweets every day the [top treding reporitory on
-GitHub](https://github.com/trending) that day.
+A [bot](https://twitter.com/github4ai) that tweets AI/ML-related GitHub
+repositories every day.
 
 ## Pre-requisites
 
 This bot is written in Python 3.9.
 
-## Contribution
+## Development
 
 * Instal pip packages: `pip install -r requirements.txt`
 
-## Installation
+<!-- ## Installation
 
 Navigate to the project source root and issue the following command:
 
 ```bash
 > pip install .
-```
+``` -->
