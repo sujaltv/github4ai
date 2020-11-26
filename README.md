@@ -1,7 +1,7 @@
 # GitHub TopStar
 
-This is a [bot](https://twitter.com/GitHubTopStar) that tweets every day the [top treding reporitory on
-GitHub](https://github.com/trending) that day.
+A [bot](https://twitter.com/GitHubTopStar) that tweets AI/ML-related GitHub
+repositories every day.
 
 ## Pre-requisites
 
