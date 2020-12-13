@@ -9,4 +9,6 @@ This bot is written in Python 3.9.
 
 ## Development
 
-* Instal pip packages: `pip install -r requirements.txt`
+Instal packages.
+* `pip install -r requirements.txt`
+* `conda install --file requirements.txt`
