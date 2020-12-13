@@ -6,7 +6,7 @@ with open(requirements_txt) as reqs:
   install_requires = reqs.read().splitlines()
 
 setup(
-  name='githubtopstar',
+  name='github4ai',
   version='0.0.1',
   author='TVS',
   packages=find_packages(exclude=['tests']),

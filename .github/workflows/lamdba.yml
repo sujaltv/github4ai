@@ -1,0 +1,35 @@
+name: Deploy to AWS Lambda
+on:
+  push:
+    branches: [ master ]
+jobs:
+  deploy_source:
+    name: Build and deploy to Lambda
+    strategy:
+      matrix:
+        node-version: [12.x]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install --target ./ -r requirements.txt
+        env:
+          CI: true
+      - name: Package source (.zip)
+        uses: montudor/action-zip@v0.1.0
+        with:
+          args: zip -gg -r ./bundle.zip ./
+      - name: Deploy package to AWS Lambda
+        uses: appleboy/lambda-action@master
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: ${{ secrets.AWS_REGION }}
+          function_name: ${{ secrets.AWS_LAMBDA_FUNCTION }}
+          zip_file: bundle.zip

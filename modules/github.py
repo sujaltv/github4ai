@@ -13,9 +13,9 @@ class GitHub:
 
   @staticmethod
   def dict_to_query(dict):
-    """Given a dictionary of query parameters, this method return a string
-    formatted from @dict according to GitHub search syntax
-    (https://developer.github.com/v3/search/#constructing-a-search-query)
+    """Given a dictionary of query parameters, this method returns a formatted
+    string from @dict according to GitHub query string syntax
+    (https://developer.github.com/v3/search/#constructing-a-search-query).
 
     Args:
         dict (dict): A dictionary of query parameters
@@ -27,6 +27,7 @@ class GitHub:
     query = []
     for (key, value) in dict.items():
       if isinstance(value, list):
+        # GitHub restricts the numbers of compounded queries to 5
         if len(value) > 5:
           value = value[:5]
         query.append('+'.join(list(map(lambda v: key + ':' + str(v), value))))
@@ -36,15 +37,14 @@ class GitHub:
 
   def get_result(self, params):
     """Given search parameters, this method makes a network call to GitHub
-    through the search API
-    (https://developer.github.com/v3/search/#search-repositories) and returns
-    the result
+    through GitHub's search API and returns the result.
+    (https://developer.github.com/v3/search/#search-repositories)
 
     Args:
         params (dict): A dictionary of search parameters
 
     Returns:
-        [[dict]]: A list of repository details
+        [list(dict)]: A list of repository details
     """
     response = get(
       self.__GITHUB_REPOS__,

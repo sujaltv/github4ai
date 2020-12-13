@@ -1,10 +1,10 @@
 from dotenv import load_dotenv
 load_dotenv()
 
-import random
+import os
 import time
+import random
 from datetime import datetime
-import schedule
 from yaml import load, Loader
 
 from modules.github import GitHub
@@ -14,11 +14,12 @@ github = GitHub()
 twitter = Twitter()
 
 
-def get_tweet_content_from_res(gh_res):
-  """Built the content to be tweeted from response object returned by GitHub API
+def __get_tweet_content_from_res(gh_res):
+  """From the response object returned by GitHub's API, this function buils the
+  content to be tweeted
 
   Args:
-      gh_res (dict): A dictionary of repository details to
+      gh_res (dict): A dictionary of repository details
 
   Returns:
       str: The string to be tweeted.
@@ -36,7 +37,7 @@ def get_tweet_content_from_res(gh_res):
 with \
   open('./config/keywords.yml') as kwds,\
   open('./config/languages.yml') as lngs:
-  # Add quotes are each array item to accound phrases)
+  # Add quotes are each array item to account for phrases
   keywords = list(map(lambda k: f'"{k}"', load(kwds, Loader=Loader)))
   languages = list(map(lambda k: f'"{k}"', load(lngs, Loader=Loader)))
 
@@ -49,13 +50,13 @@ def bot_job():
   while len(repos) == 0 and count < 10:
     repos_by_stars = {
       "q": GitHub.dict_to_query({
-        f'{" OR ".join(random.choices(keywords, k=5))} in': 'readme',
+        f'{" OR ".join(random.choices(keywords, k=2))} in': 'readme',
         'language': random.choice(languages),
         'fork': 'true',
       "sort": "created"
       }),
       "page": 1,
-      # "per_page": 1,
+      # "per_page": 1
     }
 
     repos = github.get_result(repos_by_stars)
@@ -64,15 +65,6 @@ def bot_job():
   if len(repos) == 0:
     return
 
-  tweet_content = get_tweet_content_from_res(random.choice(repos))
+  tweet_content = __get_tweet_content_from_res(random.choice(repos))
   twitter.tweet(tweet_content)
-
-
-if __name__ == '__main__':
-  schedule.every().day.at("00:00").do(bot_job)
-  schedule.every().day.at("12:00").do(bot_job)
-
-  while True:
-    print(f'Log on {datetime.now().strftime("%a, %d %h %Y at %H:%M")}.')
-    schedule.run_pending()
-    time.sleep(60)
+  print(f'Tweeted on {datetime.now().strftime("%a, %d %h %Y at %H:%M:%S")}.')
