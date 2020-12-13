@@ -5,9 +5,6 @@ on:
 jobs:
   deploy_source:
     name: Build and deploy to Lambda
-    strategy:
-      matrix:
-        node-version: [12.x]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
