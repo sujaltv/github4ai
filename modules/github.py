@@ -46,6 +46,7 @@ class GitHub:
     Returns:
         [list(dict)]: A list of repository details
     """
+
     response = get(
       self.__GITHUB_REPOS__,
       params=params,

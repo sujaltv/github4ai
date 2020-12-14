@@ -7,8 +7,8 @@ with open(requirements_txt) as reqs:
 
 setup(
   name='github4ai',
-  version='0.0.1',
-  author='TVS',
+  version='0.1.0',
+  author='@tvsujal',
   packages=find_packages(exclude=['tests']),
   description='Tweet bot that tweets top-starred GitHub repository',
   long_description='''
