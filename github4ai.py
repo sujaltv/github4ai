@@ -24,9 +24,10 @@ def __get_tweet_content_from_res(gh_res):
   Returns:
       str: The string to be tweeted.
   """
+
   tweet_content = gh_res["name"]
   if gh_res["language"]:
-    tweet_content += f' in {gh_res["language"]}'
+    tweet_content += f' in #{gh_res["language"]}'
   tweet_content += f' by {gh_res["owner"]["login"]} ({gh_res["html_url"]}).'
   if gh_res["description"]:
     tweet_content += f'\n{gh_res["description"][:100]}'
