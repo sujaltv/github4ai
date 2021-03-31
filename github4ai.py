@@ -15,7 +15,7 @@ twitter = Twitter()
 
 
 def __get_tweet_content_from_res(gh_res):
-  """From the response object returned by GitHub's API, this function buils the
+  """From the response object returned by GitHub's API, this function builds the
   content to be tweeted
 
   Args:
@@ -35,17 +35,18 @@ def __get_tweet_content_from_res(gh_res):
       tweet_content += '...'
   return tweet_content
 
-with \
-  open('./config/keywords.yml') as kwds,\
-  open('./config/languages.yml') as lngs:
-  # Add quotes are each array item to account for phrases
-  keywords = list(map(lambda k: f'"{k}"', load(kwds, Loader=Loader)))
-  languages = list(map(lambda k: f'"{k}"', load(lngs, Loader=Loader)))
 
 def bot_job():
   random.seed(time.time())
   repos = []
   count = 0
+
+  with \
+    open('./config/keywords.yml') as kwds,\
+    open('./config/languages.yml') as lngs:
+    # Add quotes are each array item to account for phrases
+    keywords = list(map(lambda k: f'"{k}"', load(kwds, Loader=Loader)))
+    languages = list(map(lambda k: f'"{k}"', load(lngs, Loader=Loader)))
 
   # If no repository found, retry with a different random search configuration
   while len(repos) == 0 and count < 10:
