@@ -1,10 +1,12 @@
 name: Deploy to AWS Lambda
 on:
+  workflow_dispatch:
+    branches: [ master ]
   push:
     branches: [ master ]
 jobs:
   deploy_source:
-    name: Build and deploy to Lambda
+    name: Build and deploy to AWS Lambda
     runs-on: ubuntu-latest
     steps:
       - name: Check out source code
